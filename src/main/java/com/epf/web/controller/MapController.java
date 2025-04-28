@@ -7,17 +7,17 @@ import com.epf.model.GameMap;
 import com.epf.service.MapService;
 
 @RestController
-@RequestMapping("/api/maps")
+@RequestMapping("/maps")
 public class MapController {
     private final MapService service;
-
-    public MapController(MapService service) {
-        this.service = service;
-    }
+    public MapController(MapService service) { this.service = service; }
 
     @GetMapping
-    public List<GameMap> all() {
-        return service.getAll();
+    public List<GameMap> all() { return service.getAll(); }
+
+    @GetMapping("/validation")
+    public ResponseEntity<Void> validateFormat() {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
@@ -28,13 +28,15 @@ public class MapController {
 
     @PostMapping
     public ResponseEntity<GameMap> create(@RequestBody GameMap m) {
-        GameMap created = service.create(m);
-        return ResponseEntity.status(201).body(created);
+        service.create(m);
+        return ResponseEntity.status(201).body(m);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GameMap> update(@PathVariable Long id, @RequestBody GameMap m) {
-        GameMap updated = service.update(id, m);
+    public ResponseEntity<GameMap> update(
+            @PathVariable Long id,
+            @RequestBody GameMap m) {
+        var updated = service.update(id, m);
         return ResponseEntity.ok(updated);
     }
 

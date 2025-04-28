@@ -6,7 +6,7 @@ import com.epf.model.GameMap;
 public interface MapService {
     List<GameMap> getAll();
     GameMap getOne(Long id);
-    GameMap create(GameMap map);
-    GameMap update(Long id, GameMap map);
+    GameMap create(GameMap m);
+    GameMap update(Long id, GameMap m);
     void delete(Long id);
 }

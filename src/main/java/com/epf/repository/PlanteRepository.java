@@ -130,7 +130,7 @@ public class PlanteRepository {
             p.getSoleilParSeconde(),
             p.getEffet(),
             p.getCheminImage(),
-            p.getIdPlante()
+            p.getId()
         );
     }
 

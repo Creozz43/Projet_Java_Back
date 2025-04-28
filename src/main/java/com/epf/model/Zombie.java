@@ -1,39 +1,50 @@
 package com.epf.model;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Zombie {
-    private Long id;
-    private String name;
-    private Integer health;
-    private Integer damage;
-    private Long mapId;
+    @JsonProperty("id_zombie")
+    private Long idZombie;
+    private String nom;
+    private int pointDeVie;
+    private double attaqueParSeconde;
+    private int degatAttaque;
+    @JsonProperty("vitesse_de_deplacement")
+    private double vitesseDeplacement;
+    private String cheminImage;
+    @JsonProperty("id_map")
+    private Long idMap;        // peut être null
 
-    public Zombie() { }
-    public Zombie(Long id, String name, Integer health, Integer damage, Long mapId) {
-        this.id = id; this.name = name; this.health = health; this.damage = damage; this.mapId = mapId;
-    }
-    public Long getId()                { return id; }
-    public void setId(Long id)         { this.id = id; }
-    public String getName()            { return name; }
-    public void setName(String name)   { this.name = name; }
-    public Integer getHealth()         { return health; }
-    public void setHealth(Integer health) { this.health = health; }
-    public Integer getDamage()         { return damage; }
-    public void setDamage(Integer damage) { this.damage = damage; }
-    public Long getMapId()             { return mapId; }
-    public void setMapId(Long mapId)   { this.mapId = mapId; }
+    public Zombie() {}
 
-    @Override public String toString() {
-        return "Zombie{id="+id+", name='"+name+"', health="+health+", damage="+damage+", mapId="+mapId+"}";
+    public Zombie(Long idZombie, String nom, int pv, double aps, int da, double vitesse,
+                  String cheminImage, Long idMap) {
+        this.idZombie = idZombie; this.nom = nom; this.pointDeVie = pv;
+        this.attaqueParSeconde = aps; this.degatAttaque = da;
+        this.vitesseDeplacement = vitesse; this.cheminImage = cheminImage;
+        this.idMap = idMap;
     }
-    @Override public boolean equals(Object o) {
-        if(this==o) return true;
-        if(!(o instanceof Zombie)) return false;
-        Zombie z=(Zombie)o;
-        return Objects.equals(id,z.id)&&Objects.equals(name,z.name)&&Objects.equals(health,z.health)&&Objects.equals(damage,z.damage)&&Objects.equals(mapId,z.mapId);
-    }
-    @Override public int hashCode() {
-        return Objects.hash(id,name,health,damage,mapId);
-    }
+ 
+
+    // getters & setters    
+    public Long getIdZombie() { return idZombie; }
+    public void setIdZombie(Long idZombie) { this.idZombie = idZombie; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+    public int getPointDeVie() { return pointDeVie; }
+    public void setPointDeVie(int pointDeVie) { this.pointDeVie = pointDeVie; }
+    public double getAttaqueParSeconde() { return attaqueParSeconde; }
+    public void setAttaqueParSeconde(double attaqueParSeconde) { this.attaqueParSeconde = attaqueParSeconde; }
+    public int getDegatAttaque() { return degatAttaque; }
+    public void setDegatAttaque(int degatAttaque) { this.degatAttaque = degatAttaque; }
+    public double getVitesseDeplacement() { return vitesseDeplacement; }
+    public void setVitesseDeplacement(double vitesseDeplacement) { this.vitesseDeplacement = vitesseDeplacement; }
+    public String getCheminImage() { return cheminImage; }
+    public void setCheminImage(String cheminImage) { this.cheminImage = cheminImage; }
+    public Long getIdMap() { return idMap; }
+    public void setIdMap(Long idMap) { this.idMap = idMap; }
+
 }

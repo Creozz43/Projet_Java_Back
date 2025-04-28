@@ -7,17 +7,17 @@ import com.epf.model.Zombie;
 import com.epf.service.ZombieService;
 
 @RestController
-@RequestMapping("/api/zombies")
+@RequestMapping("/zombies")
 public class ZombieController {
     private final ZombieService service;
-
-    public ZombieController(ZombieService service) {
-        this.service = service;
-    }
+    public ZombieController(ZombieService service) { this.service = service; }
 
     @GetMapping
-    public List<Zombie> all() {
-        return service.getAll();
+    public List<Zombie> all() { return service.getAll(); }
+
+    @GetMapping("/validation")
+    public ResponseEntity<Void> validateFormat() {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
@@ -26,20 +26,17 @@ public class ZombieController {
         return z != null ? ResponseEntity.ok(z) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/map/{mapId}")
-    public List<Zombie> byMap(@PathVariable Long mapId) {
-        return service.getByMapId(mapId);
-    }
-
     @PostMapping
     public ResponseEntity<Zombie> create(@RequestBody Zombie z) {
-        Zombie created = service.create(z);
-        return ResponseEntity.status(201).body(created);
+        service.create(z);
+        return ResponseEntity.status(201).body(z);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Zombie> update(@PathVariable Long id, @RequestBody Zombie z) {
-        Zombie updated = service.update(id, z);
+    public ResponseEntity<Zombie> update(
+            @PathVariable Long id,
+            @RequestBody Zombie z) {
+        var updated = service.update(id, z);
         return ResponseEntity.ok(updated);
     }
 

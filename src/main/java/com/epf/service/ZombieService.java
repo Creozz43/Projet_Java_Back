@@ -6,8 +6,7 @@ import com.epf.model.Zombie;
 public interface ZombieService {
     List<Zombie> getAll();
     Zombie getOne(Long id);
-    Zombie create(Zombie zombie);
-    Zombie update(Long id, Zombie zombie);
+    Zombie create(Zombie z);
+    Zombie update(Long id, Zombie z);
     void delete(Long id);
-    List<Zombie> getByMapId(Long mapId);
 }

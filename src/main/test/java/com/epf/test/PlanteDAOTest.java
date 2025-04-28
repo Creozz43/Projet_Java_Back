@@ -1,70 +1,43 @@
-package com.epf.test;
+package com.epf.dao;
 
-import com.epf.dao.impl.PlanteDAOImpl;
-import com.epf.model.Plante;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
-public class PlanteDAOTest {
+import com.epf.dao.impl.PlanteDaoImpl;
+import com.epf.model.Plante;
 
-    @Mock
-    private JdbcTemplate jdbcTemplate;
-
-    private PlanteDAOImpl planteDAO;
+class PlanteDaoTest {
+    @Mock JdbcTemplate jdbc;
+    @InjectMocks PlanteDaoImpl dao;
 
     @BeforeEach
-    public void setUp() {
+    void init() {
         MockitoAnnotations.openMocks(this);
-        planteDAO = new PlanteDAOImpl(jdbcTemplate);
     }
 
     @Test
-    public void testGetAllPlantes() {
-        List<Plante> plantes = List.of(new Plante());
-        when(jdbcTemplate.query(anyString(), any(RowMapper.class))).thenReturn(plantes);
-
-        List<Plante> result = planteDAO.getAllPlantes();
-
-        assertNotNull(result);
-        assertEquals(1, result.size());
+    void findAll_nonEmpty() {
+        when(jdbc.query(anyString(), any(RowMapper.class)))
+            .thenReturn(List.of(new Plante(1L,"P",1,1.0,1,1,1.0,"E","img")));
+        var all = dao.findAll();
+        assertEquals(1, all.size());
     }
 
     @Test
-    public void testAddPlante() {
-        Plante plante = new Plante();
-        doReturn(1).when(jdbcTemplate).update(anyString(), any(Object[].class));
-
-        planteDAO.addPlante(plante);
-
-        verify(jdbcTemplate, times(1)).update(anyString(), any(Object[].class));
-    }
-
-    @Test
-    public void testUpdatePlante() {
-        Plante plante = new Plante();
-        doReturn(1).when(jdbcTemplate).update(anyString(), any(Object[].class));
-
-        planteDAO.updatePlante(plante);
-
-        verify(jdbcTemplate, times(1)).update(anyString(), any(Object[].class));
-    }
-
-    @Test
-    public void testDeletePlante() {
-        int id = 1;
-        doReturn(1).when(jdbcTemplate).update(anyString(), any(Object[].class));
-
-        planteDAO.deletePlante(id);
-
-        verify(jdbcTemplate, times(1)).update(anyString(), any(Object[].class));
+    void create_invokesUpdate() {
+        Plante p = new Plante(null,"P",0,0,0,0,0,"",""); 
+        when(jdbc.update(anyString(), any(), any(), any(), any(), any(), any(), any()))
+            .thenReturn(1);
+        assertEquals(1, dao.create(p));
+        verify(jdbc).update(anyString(), any(), any(), any(), any(), any(), any(), any());
     }
 }

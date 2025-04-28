@@ -1,30 +1,22 @@
 package com.epf.model;
 
-import java.util.Objects;
-
 public class Plante {
-    private Long idPlante;
+    private Long id;
     private String nom;
-    private Integer pointDeVie;
-    private Double attaqueParSeconde;
-    private Integer degatAttaque;
-    private Integer cout;
-    private Double soleilParSeconde;
+    private int pointDeVie;
+    private double attaqueParSeconde;
+    private int degatAttaque;
+    private int cout;
+    private double soleilParSeconde;
     private String effet;
     private String cheminImage;
 
-    public Plante() { }
+    public Plante() {}
 
-    public Plante(Long idPlante,
-                  String nom,
-                  Integer pointDeVie,
-                  Double attaqueParSeconde,
-                  Integer degatAttaque,
-                  Integer cout,
-                  Double soleilParSeconde,
-                  String effet,
-                  String cheminImage) {
-        this.idPlante = idPlante;
+    public Plante(Long id, String nom, int pointDeVie, double attaqueParSeconde,
+                  int degatAttaque, int cout, double soleilParSeconde,
+                  String effet, String cheminImage) {
+        this.id = id;
         this.nom = nom;
         this.pointDeVie = pointDeVie;
         this.attaqueParSeconde = attaqueParSeconde;
@@ -35,114 +27,31 @@ public class Plante {
         this.cheminImage = cheminImage;
     }
 
-    // --- Getters & Setters ---
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getIdPlante() {
-        return idPlante;
-    }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
 
-    public void setIdPlante(Long idPlante) {
-        this.idPlante = idPlante;
-    }
+    public int getPointDeVie() { return pointDeVie; }
+    public void setPointDeVie(int pointDeVie) { this.pointDeVie = pointDeVie; }
 
-    public String getNom() {
-        return nom;
-    }
+    public double getAttaqueParSeconde() { return attaqueParSeconde; }
+    public void setAttaqueParSeconde(double atk) { this.attaqueParSeconde = atk; }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    public int getDegatAttaque() { return degatAttaque; }
+    public void setDegatAttaque(int deg) { this.degatAttaque = deg; }
 
-    public Integer getPointDeVie() {
-        return pointDeVie;
-    }
+    public int getCout() { return cout; }
+    public void setCout(int cout) { this.cout = cout; }
 
-    public void setPointDeVie(Integer pointDeVie) {
-        this.pointDeVie = pointDeVie;
-    }
+    public double getSoleilParSeconde() { return soleilParSeconde; }
+    public void setSoleilParSeconde(double sp) { this.soleilParSeconde = sp; }
 
-    public Double getAttaqueParSeconde() {
-        return attaqueParSeconde;
-    }
+    public String getEffet() { return effet; }
+    public void setEffet(String effet) { this.effet = effet; }
 
-    public void setAttaqueParSeconde(Double attaqueParSeconde) {
-        this.attaqueParSeconde = attaqueParSeconde;
-    }
-
-    public Integer getDegatAttaque() {
-        return degatAttaque;
-    }
-
-    public void setDegatAttaque(Integer degatAttaque) {
-        this.degatAttaque = degatAttaque;
-    }
-
-    public Integer getCout() {
-        return cout;
-    }
-
-    public void setCout(Integer cout) {
-        this.cout = cout;
-    }
-
-    public Double getSoleilParSeconde() {
-        return soleilParSeconde;
-    }
-
-    public void setSoleilParSeconde(Double soleilParSeconde) {
-        this.soleilParSeconde = soleilParSeconde;
-    }
-
-    public String getEffet() {
-        return effet;
-    }
-
-    public void setEffet(String effet) {
-        this.effet = effet;
-    }
-
-    public String getCheminImage() {
-        return cheminImage;
-    }
-
-    public void setCheminImage(String cheminImage) {
-        this.cheminImage = cheminImage;
-    }
-
-    @Override
-    public String toString() {
-        return "Plante{" +
-                "idPlante=" + idPlante +
-                ", nom='" + nom + '\'' +
-                ", pointDeVie=" + pointDeVie +
-                ", attaqueParSeconde=" + attaqueParSeconde +
-                ", degatAttaque=" + degatAttaque +
-                ", cout=" + cout +
-                ", soleilParSeconde=" + soleilParSeconde +
-                ", effet='" + effet + '\'' +
-                ", cheminImage='" + cheminImage + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Plante)) return false;
-        Plante p = (Plante) o;
-        return Objects.equals(idPlante, p.idPlante) &&
-               Objects.equals(nom, p.nom) &&
-               Objects.equals(pointDeVie, p.pointDeVie) &&
-               Objects.equals(attaqueParSeconde, p.attaqueParSeconde) &&
-               Objects.equals(degatAttaque, p.degatAttaque) &&
-               Objects.equals(cout, p.cout) &&
-               Objects.equals(soleilParSeconde, p.soleilParSeconde) &&
-               Objects.equals(effet, p.effet) &&
-               Objects.equals(cheminImage, p.cheminImage);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPlante, nom, pointDeVie, attaqueParSeconde,
-                            degatAttaque, cout, soleilParSeconde, effet, cheminImage);
-    }
+    public String getCheminImage() { return cheminImage; }
+    public void setCheminImage(String cheminImage) { this.cheminImage = cheminImage; }
 }

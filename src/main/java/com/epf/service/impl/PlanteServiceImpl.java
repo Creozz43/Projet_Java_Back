@@ -32,8 +32,8 @@ public class PlanteServiceImpl implements PlanteService {
 
     @Override
     public Plante update(Long id, Plante plante) {
-        // on utilise setIdPlante au lieu de setId
-        plante.setIdPlante(id);
+        // on utilise setId(...) au lieu de setIdPlante(...)
+        plante.setId(id);
         dao.update(plante);
         return plante;
     }

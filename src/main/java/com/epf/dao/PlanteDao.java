@@ -6,7 +6,7 @@ import com.epf.model.Plante;
 public interface PlanteDao {
     List<Plante> findAll();
     Plante findById(Long id);
-    int create(Plante plante);
-    int update(Plante plante);
+    int create(Plante p);
+    int update(Plante p);
     int delete(Long id);
 }

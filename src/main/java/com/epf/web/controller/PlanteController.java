@@ -7,41 +7,37 @@ import com.epf.model.Plante;
 import com.epf.service.PlanteService;
 
 @RestController
-@RequestMapping("/api/plantes")
+
+@RequestMapping("/plantes")
 public class PlanteController {
     private final PlanteService service;
-
-    public PlanteController(PlanteService service) {
-        this.service = service;
-    }
+    public PlanteController(PlanteService s){ this.service=s; }
 
     @GetMapping
-    public List<Plante> all() {
-        return service.getAll();
-    }
+    public List<Plante> all(){ return service.getAll(); }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Plante> one(@PathVariable Long id) {
+    public ResponseEntity<Plante> one(@PathVariable Long id){
         Plante p = service.getOne(id);
-        return p != null ? ResponseEntity.ok(p) : ResponseEntity.notFound().build();
+        return p!=null?ResponseEntity.ok(p):ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<Plante> create(@RequestBody Plante p) {
-        Plante created = service.create(p);
-        return ResponseEntity.status(201).body(created);
+    public ResponseEntity<Plante> create(@RequestBody Plante p){
+        return ResponseEntity.status(201).body(service.create(p));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Plante> update(@PathVariable Long id, @RequestBody Plante p) {
-        // setIdPlante est appelé dans le service
-        Plante updated = service.update(id, p);
-        return ResponseEntity.ok(updated);
+    public Plante update(@PathVariable Long id,@RequestBody Plante p){
+        return service.update(id,p);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    public ResponseEntity<Void> validateFormat() {
+        return ResponseEntity.ok().build();
     }
 }

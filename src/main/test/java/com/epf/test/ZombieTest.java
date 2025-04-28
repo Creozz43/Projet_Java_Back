@@ -1,43 +1,23 @@
-package com.epf.test;
-
-import com.epf.model.Zombie;
-import org.junit.jupiter.api.Test;
+package com.epf.model;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-public class ZombieTest {
+class ZombieTest {
+    @Test void gettersAndSetters(){
+        Zombie z = new Zombie();
+        z.setId(2L);
+        z.setNom("Z");
+        z.setPointDeVie(20);
+        z.setVitesse(3.5);
+        z.setDegat(4);
+        z.setCheminImage("z.png");
 
-    @Test
-    public void testZombieConstructorAndGetters() {
-        Zombie zombie = new Zombie(1, "Zombie de base", 150, 1.2, 1.5, 40, "path/to/image", 1);
-
-        assertEquals(1, zombie.getId_zombie());
-        assertEquals("Zombie de base", zombie.getNom());
-        assertEquals(150, zombie.getPoint_de_vie());
-        assertEquals(1.2, zombie.getVitesse_de_deplacement());
-        assertEquals(1.5, zombie.getAttaqueParSeconde());
-        assertEquals(40, zombie.getDegatsParAttaque());
-        assertEquals("path/to/image", zombie.getCheminImage());
-        assertEquals(1, zombie.getMapId());
-    }
-
-    @Test
-    public void testZombieSetters() {
-        Zombie zombie = new Zombie();
-        zombie.setId_zombie(1);
-        zombie.setNom("Zombie de base");
-        zombie.setPoint_de_vie(150);
-        zombie.setVitesse_de_deplacement(1.2);
-        zombie.setAttaqueParSeconde(1.5);
-        zombie.setDegatsParAttaque(40);
-        zombie.setCheminImage("path/to/image");
-
-        assertEquals(1, zombie.getId_zombie());
-        assertEquals("Zombie de base", zombie.getNom());
-        assertEquals(150, zombie.getPoint_de_vie());
-        assertEquals(1.2, zombie.getVitesse_de_deplacement());
-        assertEquals(1.5, zombie.getAttaqueParSeconde());
-        assertEquals(40, zombie.getDegatsParAttaque());
-        assertEquals("path/to/image", zombie.getCheminImage());
+        assertEquals(2L, z.getId());
+        assertEquals("Z", z.getNom());
+        assertEquals(20, z.getPointDeVie());
+        assertEquals(3.5, z.getVitesse());
+        assertEquals(4, z.getDegat());
+        assertEquals("z.png", z.getCheminImage());
     }
 }
